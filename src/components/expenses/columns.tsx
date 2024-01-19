@@ -2,10 +2,8 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 
-import { Checkbox } from "@/components/ui/checkbox";
-
 import { statuses } from "./data/data";
-import { CompleteExpense } from "./data/schema";
+import { CompleteExpense } from "../../schemas/zod";
 import { DataTableColumnHeader } from "./data-table-column-header";
 import { DataTableRowActions } from "./data-table-row-actions";
 

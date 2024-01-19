@@ -42,8 +42,10 @@ import { useEffect, useTransition } from "react";
 import ExpenseService from "@/services/expense.service";
 import { useRouter } from "next/navigation";
 import AuthService from "@/services/auth.service";
+import { unstable_noStore } from "next/cache";
 
 export default function UpdateExpenseForm({ params }: { params: { id: number } }) {
+  unstable_noStore  ();
     const router = useRouter();
       const currentUser = AuthService.getCurrentUser();
     if (!currentUser) {

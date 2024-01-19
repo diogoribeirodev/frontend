@@ -42,6 +42,7 @@ import { useTransition } from "react";
 import ExpenseService from "@/services/expense.service";
 import { useRouter } from "next/navigation";
 import AuthService from "@/services/auth.service";
+import { unstable_noStore } from "next/cache";
 
 type NewExpenseParams = z.infer<typeof insertExpenseParams>;
 
@@ -58,6 +59,7 @@ const defaultValues: Partial<NewExpenseParams> = {
 };
 
 export default function ExpenseForm() {
+  unstable_noStore();
   const router  = useRouter();
       const currentUser = AuthService.getCurrentUser();
     if (!currentUser) {

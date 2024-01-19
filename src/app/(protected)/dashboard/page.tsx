@@ -9,8 +9,10 @@ import { DataTable } from "@/components/expenses/data-table";
 import AuthService from "@/services/auth.service";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { unstable_noStore } from "next/cache";
 
 export default function Dashboard() {
+  unstable_noStore();
     const router = useRouter();
   const [expenses, setExpenses] = useState([]);
     const currentUser = AuthService.getCurrentUser();
