@@ -9,13 +9,10 @@ export default function Home() {
   const user = AuthService.getCurrentUser();
   const router = useRouter();
   if (!user) {
-   router.push("/auth/signin");
-  } else if (user){
-  router.push("/dashboard");}
+    router.push("/auth/signin");
+  } else if (user) {
+    router.push("/dashboard");
+  }
 
-
-  return (
-    <main>
-    </main>
-  );
+  return <main></main>;
 }

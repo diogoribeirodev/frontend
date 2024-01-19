@@ -147,6 +147,6 @@ export const columns: ColumnDef<CompleteExpense>[] = [
   },
   {
     id: "actions",
-    cell: ({ row }) => <DataTableRowActions props={row.getValue("id")}  />,
+    cell: ({ row }) => <DataTableRowActions props={row.getValue("id")} />,
   },
 ];

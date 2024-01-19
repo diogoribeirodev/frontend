@@ -60,22 +60,21 @@ const defaultValues: Partial<NewExpenseParams> = {
 
 export default function ExpenseForm() {
   unstable_noStore();
-  const router  = useRouter();
-      const currentUser = AuthService.getCurrentUser();
-    if (!currentUser) {
-     router.push("/auth/signin");
-    }
+  const router = useRouter();
+  const currentUser = AuthService.getCurrentUser();
+  if (!currentUser) {
+    router.push("/auth/signin");
+  }
 
   const form = useForm<NewExpenseParams>({
     resolver: zodResolver(insertExpenseParams),
     defaultValues,
   });
 
-    const [isPending, startTransition] = useTransition();
-
+  const [isPending, startTransition] = useTransition();
 
   function onSubmit(data: NewExpenseParams) {
-    startTransition(async() => {
+    startTransition(async () => {
       await ExpenseService.create(data)
         .then(() => {
           toast.success("Expense created!");
@@ -122,7 +121,7 @@ export default function ExpenseForm() {
               </FormItem>
             )}
           />
-<FormField
+          <FormField
             control={form.control}
             name="paid"
             render={({ field }) => (
@@ -141,7 +140,8 @@ export default function ExpenseForm() {
                       >
                         {field.value
                           ? statuses.find(
-                              (status) => status.value === field.value && status.label,
+                              (status) =>
+                                status.value === field.value && status.label,
                             )?.label
                           : "Select Status"}
                         <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -157,7 +157,7 @@ export default function ExpenseForm() {
                           <CommandItem
                             value={status.label}
                             key={String(status.value)}
-                            onSelect={() => { 
+                            onSelect={() => {
                               form.setValue("paid", status.value as any);
                             }}
                           >

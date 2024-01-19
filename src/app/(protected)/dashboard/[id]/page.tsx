@@ -31,7 +31,12 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { CardWrapper } from "@/components/auth/CardWrapper";
-import { Expense, NewExpenseParams, insertExpenseParams, updateExpenseParams } from "@/schemas";
+import {
+  Expense,
+  NewExpenseParams,
+  insertExpenseParams,
+  updateExpenseParams,
+} from "@/schemas";
 import {
   categories,
   paymentMethods,
@@ -44,26 +49,28 @@ import { useRouter } from "next/navigation";
 import AuthService from "@/services/auth.service";
 import { unstable_noStore } from "next/cache";
 
-export default function UpdateExpenseForm({ params }: { params: { id: number } }) {
-  unstable_noStore  ();
-    const router = useRouter();
-      const currentUser = AuthService.getCurrentUser();
-    if (!currentUser) {
-      router.push("/auth/signin");
-    }
+export default function UpdateExpenseForm({
+  params,
+}: {
+  params: { id: number };
+}) {
+  unstable_noStore();
+  const router = useRouter();
+  const currentUser = AuthService.getCurrentUser();
+  if (!currentUser) {
+    router.push("/auth/signin");
+  }
 
-      async function fetchData() {
-      const response = await ExpenseService.getById(params.id);
-      return response.data;
-    }
+  async function fetchData() {
+    const response = await ExpenseService.getById(params.id);
+    return response.data;
+  }
 
   useEffect(() => {
-
     fetchData().catch((error) => {
-      toast.error(error.response.data.description)
+      toast.error(error.response.data.description);
       router.push("/dashboard");
-    }
-    );
+    });
   }, []);
 
   const form = useForm<NewExpenseParams>({
@@ -71,10 +78,10 @@ export default function UpdateExpenseForm({ params }: { params: { id: number } }
     defaultValues: async () => fetchData(),
   });
 
-    const [isPending, startTransition] = useTransition();
+  const [isPending, startTransition] = useTransition();
 
   function onSubmit(data: NewExpenseParams) {
-    startTransition(async() => {
+    startTransition(async () => {
       await ExpenseService.update(data, params.id)
         .then(() => {
           toast.success("Expense updated!");
@@ -121,7 +128,7 @@ export default function UpdateExpenseForm({ params }: { params: { id: number } }
               </FormItem>
             )}
           />
-<FormField
+          <FormField
             control={form.control}
             name="paid"
             render={({ field }) => (
@@ -140,7 +147,8 @@ export default function UpdateExpenseForm({ params }: { params: { id: number } }
                       >
                         {field.value
                           ? statuses.find(
-                              (status) => status.value === field.value && status.label,
+                              (status) =>
+                                status.value === field.value && status.label,
                             )?.label
                           : "Select Status"}
                         <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -156,7 +164,7 @@ export default function UpdateExpenseForm({ params }: { params: { id: number } }
                           <CommandItem
                             value={status.label}
                             key={String(status.value)}
-                            onSelect={() => { 
+                            onSelect={() => {
                               form.setValue("paid", status.value as any);
                             }}
                           >

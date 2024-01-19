@@ -16,14 +16,13 @@ import { useTransition } from "react";
 import ExpenseService from "@/services/expense.service";
 import { toast } from "sonner";
 
-export function DataTableRowActions({props}: {props: string}) {
+export function DataTableRowActions({ props }: { props: string }) {
   const router = useRouter();
 
   const [isPending, startTransition] = useTransition();
 
-
   function onSubmit(props: string) {
-    startTransition(async() => {
+    startTransition(async () => {
       await ExpenseService.deleteExpense(Number(props))
         .then(() => {
           toast.success("Expense deleted!");
@@ -47,9 +46,11 @@ export function DataTableRowActions({props}: {props: string}) {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
-        <DropdownMenuItem onClick={()=>router.push(`dashboard/${props}`)}>Edit</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => router.push(`dashboard/${props}`)}>
+          Edit
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem disabled={isPending} onClick={()=> onSubmit(props)}>
+        <DropdownMenuItem disabled={isPending} onClick={() => onSubmit(props)}>
           Delete
           <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
         </DropdownMenuItem>

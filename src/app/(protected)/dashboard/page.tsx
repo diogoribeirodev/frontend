@@ -13,15 +13,14 @@ import { unstable_noStore } from "next/cache";
 
 export default function Dashboard() {
   unstable_noStore();
-    const router = useRouter();
+  const router = useRouter();
   const [expenses, setExpenses] = useState([]);
-    const currentUser = AuthService.getCurrentUser();
-    if (!currentUser) {
-      router.push("/auth/signin");
-    }
+  const currentUser = AuthService.getCurrentUser();
+  if (!currentUser) {
+    router.push("/auth/signin");
+  }
 
   useEffect(() => {
-    
     async function fetchData() {
       const response = await ExpenseService.getAll();
       return response.data;
@@ -39,14 +38,14 @@ export default function Dashboard() {
           <div>
             <h2 className="text-2xl font-bold tracking-tight">Welcome back!</h2>
             <div className="flex flex-row gap-4 items-center">
-            <p className="text-muted-foreground">
-              Here&apos;s a list of your expenses!
-            </p>
-            <Button onClick={()=> router.push("dashboard/new")}>New</Button>
+              <p className="text-muted-foreground">
+                Here&apos;s a list of your expenses!
+              </p>
+              <Button onClick={() => router.push("dashboard/new")}>New</Button>
             </div>
           </div>
           <div className="flex items-center space-x-2">
-            <UserNav user={currentUser as string}/>
+            <UserNav user={currentUser as string} />
           </div>
         </div>
         <DataTable data={expenses} columns={columns} />

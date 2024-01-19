@@ -11,9 +11,9 @@ import {
 import AuthService from "@/services/auth.service";
 import { useRouter } from "next/navigation";
 
-export function UserNav({ user}: { user: string}) {
+export function UserNav({ user }: { user: string }) {
   const router = useRouter();
-    const logOut = () => {
+  const logOut = () => {
     AuthService.signout();
     router.push("/auth/signin");
   };
@@ -24,7 +24,14 @@ export function UserNav({ user}: { user: string}) {
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
           <Avatar className="h-9 w-9">
             <AvatarImage src="/avatars/03.png" alt="@shadcn" />
-            <AvatarFallback>{user ? user.split(" ").map((n)=>n[0]).join(".") : "No name"}</AvatarFallback>
+            <AvatarFallback>
+              {user
+                ? user
+                    .split(" ")
+                    .map((n) => n[0])
+                    .join(".")
+                : "No name"}
+            </AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
@@ -35,9 +42,7 @@ export function UserNav({ user}: { user: string}) {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={logOut}>
-          Log out
-        </DropdownMenuItem>
+        <DropdownMenuItem onClick={logOut}>Log out</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

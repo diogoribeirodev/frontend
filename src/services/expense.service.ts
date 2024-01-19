@@ -31,7 +31,7 @@ const create = (values: NewExpenseParams) => {
   });
 };
 
-const update = (values: NewExpenseParams, id:number) => {
+const update = (values: NewExpenseParams, id: number) => {
   return axios.put(API_URL + id, {
     values,
   });
