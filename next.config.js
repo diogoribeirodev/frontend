@@ -4,7 +4,7 @@ const nextConfig = {
     return [
       {
         source: "/api/:path*",
-        destination: "http://localhost:3001/:path*",
+        destination: "backend-kappa-eight-71.vercel.app/:path*",
       },
     ];
   },
