@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "backend-kappa-eight-71.vercel.app/api/auth/";
+const API_URL = "https://backend-kappa-eight-71.vercel.app/api/auth/";
 const signup = async ({
   name,
   email,
