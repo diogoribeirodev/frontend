@@ -5,7 +5,7 @@ import {
   type NewExpenseParams,
 } from "@/schemas/expense";
 
-const API_URL = "https://backend-kappa-eight-71.vercel.app/expenses/";
+const API_URL = "https://backend-kappa-eight-71.vercel.app/api/expenses/";
 
 axios.interceptors.request.use(
   (config) => {
